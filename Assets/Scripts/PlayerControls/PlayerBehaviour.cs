@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerBehaviour : MonoBehaviour
 {
@@ -14,10 +15,18 @@ public class PlayerBehaviour : MonoBehaviour
     public bool isJumping;
     public Transform SpawnPoint;
 
+    [Header("Renderer")]
     private Rigidbody2D rigidBody;
     private SpriteRenderer spriteRenderer;
     private Animator animator;
-    
+
+    [Header("Lives")]
+    public int lives;
+    public GameObject lives1;
+    public GameObject lives2;
+    public GameObject lives3;
+    public GameObject lives4;
+    public GameObject lives5;
 
     // Start is called before the first frame update
     void Start()
@@ -25,12 +34,74 @@ public class PlayerBehaviour : MonoBehaviour
         rigidBody = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+
+        lives = 5;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        if (lives <= 0)
+        {
+            SceneManager.LoadScene("GameOver");
+        }
+
+        SetLives();
         Move();
+    }
+
+    void SetLives()
+    {
+        if (lives > 5)
+        {
+            lives = 5;
+        }
+
+        switch (lives)
+        {
+            case 5:
+                lives1.SetActive(true);
+                lives2.SetActive(true);
+                lives3.SetActive(true);
+                lives4.SetActive(true);
+                lives5.SetActive(true);
+                break;
+            case 4:
+                lives1.SetActive(true);
+                lives2.SetActive(true);
+                lives3.SetActive(true);
+                lives4.SetActive(true);
+                lives5.SetActive(false);
+                break;
+            case 3:
+                lives1.SetActive(true);
+                lives2.SetActive(true);
+                lives3.SetActive(true);
+                lives4.SetActive(false);
+                lives5.SetActive(false);
+                break;
+            case 2:
+                lives1.SetActive(true);
+                lives2.SetActive(true);
+                lives3.SetActive(false);
+                lives4.SetActive(false);
+                lives5.SetActive(false);
+                break;
+            case 1:
+                lives1.SetActive(true);
+                lives2.SetActive(false);
+                lives3.SetActive(false);
+                lives4.SetActive(false);
+                lives5.SetActive(false);
+                break;
+            default:
+                lives1.SetActive(false);
+                lives2.SetActive(false);
+                lives3.SetActive(false);
+                lives4.SetActive(false);
+                lives5.SetActive(false);
+                break;
+        }
     }
 
     void Move()
@@ -79,6 +150,32 @@ public class PlayerBehaviour : MonoBehaviour
         {
             isGrounded = true;
         }
+
+        if (other.gameObject.CompareTag("Walls"))
+        {
+            rigidBody.AddForce(Vector3.up * 80.0f);
+            Debug.Log("Hit Wall");
+        }
+
+        if (other.gameObject.CompareTag("Enemy"))
+        {
+            lives--;
+            transform.position = SpawnPoint.position;
+        }
+
+        if (other.gameObject.CompareTag("Apple"))
+        {
+            Destroy(other.gameObject);
+            lives++;
+            rigidBody.AddForce(Vector3.up * 50.0f);
+        }
+
+        if (other.gameObject.CompareTag("Cherry"))
+        {
+            Destroy(other.gameObject);
+            CherryScript.cherry++;
+            rigidBody.AddForce(Vector3.up * 50.0f);
+        }
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -92,6 +189,15 @@ public class PlayerBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("DeathPlane"))
         {
             transform.position = SpawnPoint.position;
+            lives--;
+        }
+
+        if (other.gameObject.CompareTag("Finish"))
+        {
+            if (CherryScript.cherry == 8)
+            {
+                SceneManager.LoadScene("WinScene");
+            }
         }
     }
 }

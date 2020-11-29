@@ -54,7 +54,6 @@ public class EnemyBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             transform.localScale = new Vector3(transform.localScale.x * -1.0f, transform.localScale.y, transform.localScale.z);
-            other.transform.Translate(other.transform.up * 2.0f);
         }
     }
 }
