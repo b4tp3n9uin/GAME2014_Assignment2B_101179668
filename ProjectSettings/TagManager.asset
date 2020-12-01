@@ -10,6 +10,8 @@ TagManager:
   - Enemy
   - Apple
   - Cherry
+  - Hazard
+  - Fire
   layers:
   - Default
   - TransparentFX

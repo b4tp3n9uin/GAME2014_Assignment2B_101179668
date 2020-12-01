@@ -28,6 +28,13 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject lives4;
     public GameObject lives5;
 
+    [Header("Bullet")]
+    public GameObject rightBullet;
+    public GameObject leftBullet;
+    Vector2 BulletPos;
+    public float fireRate;
+    public float nextFire;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -113,6 +120,7 @@ public class PlayerBehaviour : MonoBehaviour
                 // move right
                 rigidBody.AddForce(Vector3.right * horizontalForce * Time.deltaTime);
                 spriteRenderer.flipX = false;
+                FireButton.facingRight = true;
                 animator.SetInteger("AnimState", (int) PlayerAnimType.RUN);
             }
             else if (joystick.Horizontal < -joystickHorizontalSensitivity)
@@ -120,6 +128,7 @@ public class PlayerBehaviour : MonoBehaviour
                 // move left
                 rigidBody.AddForce(Vector3.left * horizontalForce * Time.deltaTime);
                 spriteRenderer.flipX = true;
+                FireButton.facingRight = false;
                 animator.SetInteger("AnimState", (int)PlayerAnimType.RUN);
             }
             else if (!isJumping)
@@ -163,10 +172,22 @@ public class PlayerBehaviour : MonoBehaviour
             transform.position = SpawnPoint.position;
         }
 
+        if (other.gameObject.CompareTag("Hazard"))
+        {
+            lives--;
+        }
+
+        if (other.gameObject.CompareTag("Fire"))
+        {
+            rigidBody.AddForce(Vector3.up * 80.0f);
+            lives--;
+        }
+
         if (other.gameObject.CompareTag("Apple"))
         {
             Destroy(other.gameObject);
             lives++;
+            ScoreSystem.score = ScoreSystem.score + 100;
             rigidBody.AddForce(Vector3.up * 50.0f);
         }
 
@@ -174,6 +195,7 @@ public class PlayerBehaviour : MonoBehaviour
         {
             Destroy(other.gameObject);
             CherryScript.cherry++;
+            ScoreSystem.score = ScoreSystem.score + 50;
             rigidBody.AddForce(Vector3.up * 50.0f);
         }
     }

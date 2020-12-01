@@ -54,10 +54,12 @@
   <ItemGroup>
     <Compile Include="Assets\External Assets\Joystick Pack\Scripts\Base\Joystick.cs" />
     <Compile Include="Assets\External Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
+    <Compile Include="Assets\Scripts\ScoreSystem\CherryScript.cs" />
     <Compile Include="Assets\Scripts\ButtonUI\LoseButton.cs" />
     <Compile Include="Assets\Scripts\Enemy\EnemyBehaviour.cs" />
     <Compile Include="Assets\External Assets\Joystick Pack\Scripts\Joysticks\FloatingJoystick.cs" />
     <Compile Include="Assets\Scripts\SoundManager\AudioManager.cs" />
+    <Compile Include="Assets\Scripts\ScoreSystem\ScoreSystem.cs" />
     <Compile Include="Assets\Scripts\ButtonUI\WinButton.cs" />
     <Compile Include="Assets\Scripts\PlayerControls\PlayerAnimType.cs" />
     <Compile Include="Assets\External Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
@@ -69,8 +71,9 @@
     <Compile Include="Assets\Scripts\ButtonUI\InstructionButton.cs" />
     <Compile Include="Assets\Scripts\PlayerControls\PlayerBehaviour.cs" />
     <Compile Include="Assets\External Assets\Joystick Pack\Scripts\Joysticks\VariableJoystick.cs" />
-    <Compile Include="Assets\Scripts\ScoreSystem\ScoreSystem.cs" />
-    <Compile Include="Assets\Scripts\ScoreSystem\CherryScript.cs" />
+    <Compile Include="Assets\Scripts\Bullet\DestroyBullet.cs" />
+    <Compile Include="Assets\Scripts\Bullet\FireButton.cs" />
+    <Compile Include="Assets\Scripts\Bullet\BananaSpeed.cs" />
   </ItemGroup>
   <ItemGroup>
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

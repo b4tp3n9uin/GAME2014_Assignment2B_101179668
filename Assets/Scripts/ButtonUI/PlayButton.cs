@@ -29,7 +29,7 @@ public class PlayButton : MonoBehaviour
     public void OnPlayButtonPressed()
     {
         FindObjectOfType<AudioManager>().Play("Select");
-
+        ScoreSystem.score = 0; // Set score back to 0 when you play again.
         SceneManager.LoadScene("GameScene");
         Debug.Log("Game Pressed");
     }
