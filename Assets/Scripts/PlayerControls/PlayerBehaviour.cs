@@ -143,7 +143,7 @@ public class PlayerBehaviour : MonoBehaviour
                 rigidBody.AddForce(Vector3.up * verticleForce);
                 animator.SetInteger("AnimState", (int) PlayerAnimType.JUMP);
                 isJumping = true;
-                Debug.Log("Jump");
+                FindObjectOfType<AudioManager>().Play("jump");
             }
             else
             {
@@ -170,17 +170,23 @@ public class PlayerBehaviour : MonoBehaviour
         {
             lives--;
             transform.position = SpawnPoint.position;
+            FindObjectOfType<AudioManager>().Play("die");
+            ChangeColorForFewSeconds();
         }
 
         if (other.gameObject.CompareTag("Hazard"))
         {
             lives--;
+            FindObjectOfType<AudioManager>().Play("die");
+            ChangeColorForFewSeconds();
         }
 
         if (other.gameObject.CompareTag("Fire"))
         {
             rigidBody.AddForce(Vector3.up * 80.0f);
             lives--;
+            FindObjectOfType<AudioManager>().Play("die");
+            ChangeColorForFewSeconds();
         }
 
         if (other.gameObject.CompareTag("Apple"))
@@ -188,6 +194,7 @@ public class PlayerBehaviour : MonoBehaviour
             Destroy(other.gameObject);
             lives++;
             ScoreSystem.score = ScoreSystem.score + 100;
+            FindObjectOfType<AudioManager>().Play("apple");
             rigidBody.AddForce(Vector3.up * 50.0f);
         }
 
@@ -196,8 +203,21 @@ public class PlayerBehaviour : MonoBehaviour
             Destroy(other.gameObject);
             CherryScript.cherry++;
             ScoreSystem.score = ScoreSystem.score + 50;
+            FindObjectOfType<AudioManager>().Play("cherry");
             rigidBody.AddForce(Vector3.up * 50.0f);
         }
+    }
+
+    private IEnumerator ChangeColorNormal()
+    {
+        yield return new WaitForSeconds(1.5f);
+        spriteRenderer.material.color = Color.Lerp(Color.red, Color.white, 1);
+    }
+
+    private void ChangeColorForFewSeconds()
+    {
+        spriteRenderer.material.color = Color.Lerp(Color.red, Color.white, 0);
+        StartCoroutine("ChangeColorNormal");
     }
 
     private void OnCollisionExit2D(Collision2D other)
@@ -212,13 +232,20 @@ public class PlayerBehaviour : MonoBehaviour
         {
             transform.position = SpawnPoint.position;
             lives--;
+            FindObjectOfType<AudioManager>().Play("die");
+            ChangeColorForFewSeconds();
         }
 
         if (other.gameObject.CompareTag("Finish"))
         {
             if (CherryScript.cherry == 8)
             {
+                FindObjectOfType<AudioManager>().Play("Victory");
                 SceneManager.LoadScene("WinScene");
+            }
+            else
+            {
+                FindObjectOfType<AudioManager>().Play("bad");
             }
         }
     }

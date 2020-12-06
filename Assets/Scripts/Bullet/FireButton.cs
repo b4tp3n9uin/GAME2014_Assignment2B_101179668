@@ -23,6 +23,7 @@ public class FireButton : MonoBehaviour
 
     public void OnFireButtonPressed()
     {
+        FindObjectOfType<AudioManager>().Play("shoot");
         Fire();
     }
 

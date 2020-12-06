@@ -42,6 +42,7 @@ public class BananaSpeed : MonoBehaviour
         {
             Destroy(other.gameObject);
             ScoreSystem.score = ScoreSystem.score + 75;
+            FindObjectOfType<AudioManager>().Play("killEnemy");
             Destroy(banana);
         }
         else if (other.gameObject.CompareTag("Player"))
