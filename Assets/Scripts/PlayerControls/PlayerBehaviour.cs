@@ -195,7 +195,7 @@ public class PlayerBehaviour : MonoBehaviour
             lives++;
             ScoreSystem.score = ScoreSystem.score + 100;
             FindObjectOfType<AudioManager>().Play("apple");
-            rigidBody.AddForce(Vector3.up * 50.0f);
+            rigidBody.AddForce(Vector3.up * 100.0f);
         }
 
         if (other.gameObject.CompareTag("Cherry"))
@@ -204,9 +204,17 @@ public class PlayerBehaviour : MonoBehaviour
             CherryScript.cherry++;
             ScoreSystem.score = ScoreSystem.score + 50;
             FindObjectOfType<AudioManager>().Play("cherry");
-            rigidBody.AddForce(Vector3.up * 50.0f);
+            rigidBody.AddForce(Vector3.up * 100.0f);
+        }
+
+        if (other.gameObject.CompareTag("CircularPlatform"))
+        {
+            isGrounded = true;
+            this.transform.parent = other.transform;
         }
     }
+
+    
 
     private IEnumerator ChangeColorNormal()
     {
@@ -222,6 +230,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D other)
     {
+        if (other.gameObject.CompareTag("CircularPlatform"))
+        {
+            this.transform.parent = null;
+        }
+
         isGrounded = false;
     }
 

@@ -12,6 +12,7 @@ TagManager:
   - Cherry
   - Hazard
   - Fire
+  - CircularPlatform
   layers:
   - Default
   - TransparentFX
