@@ -9,8 +9,7 @@ using System;
 * Date Last Modified: 11/16/2020
 * Creates the sound array and manages the Audio in the game.
 
-* Modifications:  * Create an array of sounds.
-                  * Create a play function so the array can find the sound name, and play it.
+* Modifications:  NONE
 */
 
 public class AudioManager : MonoBehaviour

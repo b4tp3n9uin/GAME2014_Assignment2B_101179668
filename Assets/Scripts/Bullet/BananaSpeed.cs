@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* Source File Name: BananaSpeed.cs
+* Student Name: Matthew Makepeace
+* Student ID: 101179668
+* Date Last Modified: 12/6/2020
+* Program Description: Banana Bullet Bheaviour Script.
+* Modifications: Added the Bullet velocity, and made the OnCollision Enter to kill Enemy, or destroy bullet when it collides with anything.
+*/
+
 public class BananaSpeed : MonoBehaviour
 {
     SpriteRenderer spriteRenderer;

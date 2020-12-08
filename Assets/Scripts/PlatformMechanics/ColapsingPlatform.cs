@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* Source File Name: ColapsingPlatform.cs
+* Student Name: Matthew Makepeace
+* Student ID: 101179668
+* Date Last Modified: 12/7/2020
+* Program Description: Script for the Colapsing Platform
+* Modifications: Added an OnCollisionEnter function to make the platform disapear after a second you collide with it. 
+*/
+
 public class ColapsingPlatform : MonoBehaviour
 {
 

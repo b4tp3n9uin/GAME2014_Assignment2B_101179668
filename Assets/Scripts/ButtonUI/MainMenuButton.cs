@@ -9,7 +9,7 @@ using UnityEngine.SceneManagement;
 * Student ID: 101179668
 * Date Last Modified: 11/16/2020
 * Program Description: Button Script to touch the button to go to the Main Menu Scene.
-* Modifications: Made a OnPressed Function to go to the Main Menu Scene
+* Modifications: NONE
 */
 
 public class MainMenuButton : MonoBehaviour

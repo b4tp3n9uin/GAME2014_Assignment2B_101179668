@@ -3,9 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+/*
+* Source File Name: PlayerBehaviour.cs
+* Student Name: Matthew Makepeace
+* Student ID: 101179668
+* Date Last Modified: 12/6/2020
+* Program Description: Player Behaviour script for it's actions, controls and physics colliders
+* Modifications: Added Player Controls, Lives Counter, OnCollisions with all the Game Objects in the level, 
+                    Animation, and Colour change when damaged.
+*/
+
 public class PlayerBehaviour : MonoBehaviour
 {
-    [Header("Controls")]
+    [Header("Controls")] // Variables for Controls
     public Joystick joystick;
     public float joystickHorizontalSensitivity;
     public float joystickVerticalSensitivity;
@@ -20,7 +30,7 @@ public class PlayerBehaviour : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Animator animator;
 
-    [Header("Lives")]
+    [Header("Lives")] // Variables for the Lives Counter
     public int lives;
     public GameObject lives1;
     public GameObject lives2;
@@ -28,7 +38,7 @@ public class PlayerBehaviour : MonoBehaviour
     public GameObject lives4;
     public GameObject lives5;
 
-    [Header("Bullet")]
+    [Header("Bullet")] // Variables for the Bullet
     public GameObject rightBullet;
     public GameObject leftBullet;
     Vector2 BulletPos;
@@ -42,13 +52,13 @@ public class PlayerBehaviour : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
 
-        lives = 5;
+        lives = 5; // You start with 5 Lives
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (lives <= 0)
+        if (lives <= 0) // Game Over and Lives = 0
         {
             SceneManager.LoadScene("GameOver");
         }
@@ -57,7 +67,7 @@ public class PlayerBehaviour : MonoBehaviour
         Move();
     }
 
-    void SetLives()
+    void SetLives() // Lives Counter
     {
         if (lives > 5)
         {
@@ -111,7 +121,7 @@ public class PlayerBehaviour : MonoBehaviour
         }
     }
 
-    void Move()
+    void Move() // Joystick Movement for running and jumping
     {
         if (isGrounded == true)
         {
@@ -216,13 +226,13 @@ public class PlayerBehaviour : MonoBehaviour
 
     
 
-    private IEnumerator ChangeColorNormal()
+    private IEnumerator ChangeColorNormal() // Coroutine the the Color back to normal after being red for 1.5 seconds.
     {
         yield return new WaitForSeconds(1.5f);
-        spriteRenderer.material.color = Color.Lerp(Color.red, Color.white, 1);
+        spriteRenderer.material.color = Color.Lerp(Color.red, Color.white, 1); 
     }
 
-    private void ChangeColorForFewSeconds()
+    private void ChangeColorForFewSeconds() // Character colour will be red if damaged.
     {
         spriteRenderer.material.color = Color.Lerp(Color.red, Color.white, 0);
         StartCoroutine("ChangeColorNormal");

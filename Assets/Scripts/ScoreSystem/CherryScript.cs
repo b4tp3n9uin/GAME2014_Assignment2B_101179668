@@ -3,6 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/*
+* Source File Name: CherryScript.cs
+* Student Name: Matthew Makepeace
+* Student ID: 101179668
+* Date Last Modified: 11/29/2020
+* Program Description: Cherry Counter Script
+* Modifications: Update the Cherry COunter Values and render the Cherry Counter on the text in the HUD.
+*/
+
 public class CherryScript : MonoBehaviour
 {
 

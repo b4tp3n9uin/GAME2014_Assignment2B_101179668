@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* Source File Name: CircularPlatform.cs
+* Student Name: Matthew Makepeace
+* Student ID: 101179668
+* Date Last Modified: 12/7/2020
+* Program Description: Script for the Cirucular Motion Platform.
+* Modifications: Created a script to make the platform move in a Ferris Wheel Motion.
+*/
+
 public class CircularPlatform : MonoBehaviour
 {
     [SerializeField]

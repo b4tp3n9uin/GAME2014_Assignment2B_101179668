@@ -2,6 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+* Source File Name: EnemyBehaviour.cs
+* Student Name: Matthew Makepeace
+* Student ID: 101179668
+* Date Last Modified: 11/29/2020
+* Program Description: Enemy Behaviour Script for the AI and Movement.
+* Modifications: Added A Raycast/Linecast to determine it's direction, and to switch directions when they hits the player.
+*/
+
 public class EnemyBehaviour : MonoBehaviour
 {
     [Header("Controls")]
